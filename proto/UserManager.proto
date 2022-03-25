@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package userManager;
+
+option go_package = "./proto;gorpc";
+
+service UserManager {
+	rpc Register(UserInfo) returns (Result) {}
+	rpc Login(UserInfo) returns (Result) {}
+	rpc LoginGoogle(UserInfo) returns (Result) {}
+	rpc Verify(VerifyInfo) returns (TokenInfo) {}
+	rpc SetMateData(MateInfo) returns (Result){}
+	rpc GetMateData(UserInfo) returns (MateInfo){}
+	rpc ChangePassword(UserInfo) returns (Result){}
+}
+
+message UserInfo {
+	string UserName = 1;
+	string PhoneNumber = 2;
+	string Password = 3;
+	int64  SecretToken = 4;
+	int64 RoleID = 5;
+	int64 GroupID = 6; 
+}
+
+message Result {
+	bool   Success = 1;
+    string Token = 2;   //登录token
+	string QtImage = 3; //谷歌二维码图片
+	int64  UserID = 4;
+}
+
+message VerifyInfo {
+	string Token = 1;
+}
+
+message TokenInfo {
+	int64  ID = 1;
+	string UserName = 2;
+	string Salt = 3;
+	int64  LoginTime = 4;
+	string LoginIP = 5;
+	int64  RoleID = 6;
+	int64  GroupID = 7; 
+	int64  AuthID = 8; //认证次数
+}
+
+message UserStore {
+	int64  ID = 1;
+	string UserName = 2;
+	string Password = 3;
+	string PhoneNumber = 4;
+	string Salt = 5;
+	string SecretToken = 6;
+	int64  RoleID = 7;
+	int64  GroupID = 8; 
+	int64  Status = 9;
+}
+
+message MateInfo {
+	int64  UserID = 1;
+	string Mate = 2;
+}
+
+message Log {
+	int64  Method = 1; //1登录、2注册
+	int64  ID = 2;
+	string UserName = 3;
+	string IP = 4;
+	bool   Success = 5;
+	int64 LoginTime = 6;
+}

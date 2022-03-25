@@ -2,8 +2,7 @@ syntax = "proto3";
 
 package AppAuthServer;
 
-
-option go_package = "./proto;AppAuthServer";
+option go_package = "./proto;gorpc";
 
 service AppAuthServer {
 	rpc Auth(AuthRequest) returns (AuthResponse) {}
