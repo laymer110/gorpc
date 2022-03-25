@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package AppAuthServer;
+
+
+option go_package = "./proto;AppAuthServer";
+
+service AppAuthServer {
+	rpc Auth(AuthRequest) returns (AuthResponse) {}
+	rpc TaskID(Task) returns (TaskKey) {}
+	rpc TaskUserID(TaskKey) returns (Task){}
+}
+
+message AuthRequest {
+	string AuthInfo = 1;
+}
+
+message AuthResponse {
+	string AuthInfo = 1;
+}
+
+message Task {
+	int64 ID = 1;
+	string TableName = 2;
+	int64 UserID = 3;
+	string SystemName = 4;
+	string Token = 5;
+}
+
+message TaskKey {
+	int64 TaskID = 1;
+}
