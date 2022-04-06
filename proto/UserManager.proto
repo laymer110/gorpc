@@ -43,6 +43,7 @@ message TokenInfo {
 	int64  RoleID = 6;
 	int64  GroupID = 7; 
 	int64  AuthID = 8; //认证次数
+	map<string, string> Mate = 9;//其他信息
 }
 
 message UserStore {
