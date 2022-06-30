@@ -10,3 +10,4 @@ init:
 proto:
 	@protoc --proto_path=. --micro_out=. --go_out=:. proto/AppAuthServer.proto
 	@protoc --proto_path=. --micro_out=. --go_out=:. proto/UserManager.proto
+	@protoc --proto_path=. --micro_out=. --go_out=:. SignatureEncryption/SignatureEncryption.proto

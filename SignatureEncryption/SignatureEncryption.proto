@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package SignatureEncryption;
+
+option go_package = "./proto;gorpc";
+
+service SignatureEncryption {
+	rpc Encrypt(EncryptRequest) returns (EncryptResponse) {}
+	rpc Decrypt(DecryptRequest) returns (DecryptResponse) {}
+}
+
+message EncryptRequest {
+	string  Method = 1;       //GET|POST
+	string  InputString = 2;  //输入数据
+	string  Key = 3;          //秘钥
+	string  Token = 4;        //传入用户鉴权信息
+	string  WorkType = 5;     //工作负载
+}
+
+message EncryptResponse {
+	bool   Success = 1;      //结果
+    string OutData = 2;      //输出结果
+}
+
+message DecryptRequest {
+	string  Method = 1;       //GET|POST
+	string  InputString = 2;  //输入数据
+	string  Key = 3;          //秘钥
+	string  Token = 4;        //传入用户鉴权信息
+}
+
+message DecryptResponse {
+	string  WorkType = 1;     //工作负载
+    string  OutData = 2;      //输出结果
+	string  Timestap = 3;     //包含的时间
+}
