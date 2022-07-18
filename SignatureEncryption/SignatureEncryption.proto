@@ -15,6 +15,7 @@ message EncryptRequest {
 	string  Key = 3;          //秘钥
 	string  Token = 4;        //传入用户鉴权信息
 	string  WorkType = 5;     //工作负载
+	string  Salt = 6;         //md5签名盐
 }
 
 message EncryptResponse {
@@ -27,6 +28,7 @@ message DecryptRequest {
 	string  InputString = 2;  //输入数据
 	string  Key = 3;          //秘钥
 	string  Token = 4;        //传入用户鉴权信息
+	string  Salt = 5;         //md5签名盐
 }
 
 message DecryptResponse {
