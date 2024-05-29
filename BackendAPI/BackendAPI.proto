@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package BackendAPI;
+
+import "proto/UserManager.proto";
+
+option go_package = "./proto;gorpc";
+
+service BackendAPI {
+	rpc CallUnionDataBackend(BackendRequest) returns (BackendResponse) {}
+}
+
+message BackendRequest {
+	string ModelName = 1; // api名称或者
+	string Method = 2;  // 增删改查导入导出
+	bytes  RequestData = 3;
+	userManager.TokenInfo User = 4;
+}
+
+ message BackendResponse {
+	int64 DataCount = 1;
+	int64 PageCount = 2;
+	int64 Code = 3; 
+	string Message = 4;
+	bytes  RespData  = 5;
+}
