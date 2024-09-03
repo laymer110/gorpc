@@ -2,11 +2,12 @@ syntax = "proto3";
 
 package BackendAPI;
 
-import "proto/UserManager.proto";
+import "define/UserManager.proto";
 
 option go_package = "./proto;gorpc";
 
 service BackendAPI {
+	rpc Migration(DBTableInfo) returns (MigrationResult) {}
 	rpc CallUnionDataBackend(BackendRequest) returns (BackendResponse) {}
 }
 
@@ -15,7 +16,6 @@ message BackendRequest {
 	string Method = 2;  // 增删改查导入导出
 	bytes  RequestData = 3;
 	userManager.TokenInfo User = 4;
-	SearchPrameter Prameter = 5;
 }
 
  message BackendResponse {
@@ -27,8 +27,22 @@ message BackendRequest {
 }
 
 
-message SearchPrameter{
-    int64 PageSize = 1; //每页数量
-	int64 PageNumber = 2;//第几页
-    int64 PageCount = 3; //共有多少页
+message DBTableInfo {
+	string TableName = 1;
+	string Description = 2;
+	repeated DBColumnInfo Column = 3;
+}
+
+message DBColumnInfo {
+	bool IsPrimary = 1;
+	string  DataType = 2;     
+	string DataLength = 3;//兼容(8,2)
+	string ColumnName = 4;
+	string DefaultValue = 5;
+	string Description = 6; //描述
+}
+
+message MigrationResult {
+    bool IsSuccess =1;
+	string Message = 2; 
 }
