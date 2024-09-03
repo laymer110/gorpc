@@ -35,11 +35,12 @@ message DBTableInfo {
 
 message DBColumnInfo {
 	bool IsPrimary = 1;
-	string  DataType = 2;     
-	string DataLength = 3;//兼容(8,2)
-	string ColumnName = 4;
-	string DefaultValue = 5;
-	string Description = 6; //描述
+	int64 FieldIndex = 2;
+	string  DataType = 3;     
+	string DataLength = 4;//兼容(8,2)
+	string ColumnName = 5;
+	string DefaultValue = 6;
+	string Description = 7; //描述
 }
 
 message MigrationResult {
